@@ -5,7 +5,7 @@ set -e
 
 SCRIPT_NAME="sgtm-debug-header"
 INSTALL_DIR="/usr/local/bin"
-SCRIPT_URL="https://raw.githubusercontent.com/prabapro/sgtm-debug-header-header/main/sgtm-debug-header-header.py"
+SCRIPT_URL="https://raw.githubusercontent.com/prabapro/sgtm-debug-header/main/sgtm-debug-header.py"
 
 echo "Installing sgtm-debug-header CLI tool..."
 
