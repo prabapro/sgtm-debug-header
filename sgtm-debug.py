@@ -81,18 +81,25 @@ def cleanup_transparent_proxy():
         pass
 
 def main():
-    if len(sys.argv) < 3:
-        print("Usage: sgtm-debug <domain> <header_value> [--web]")
+    # Parse arguments
+    args = sys.argv[1:]
+    
+    if len(args) < 2:
+        print("Usage: sgtm-debug <domain> <header_value> [options]")
         print("Example: sgtm-debug example.com ZW52LWRldjEyMzQ1")
         print("Options:")
         print("  --web    Use web interface (default: console)")
         print("  --proxy  Use manual proxy mode (requires browser config)")
+        print("  --transparent  Use transparent proxy mode (default)")
         sys.exit(1)
     
-    domain = sys.argv[1]
-    header_value = sys.argv[2]
-    use_web = '--web' in sys.argv
-    use_proxy = '--proxy' in sys.argv
+    domain = args[0]
+    header_value = args[1]
+    
+    # Check for flags
+    use_web = '--web' in args
+    use_proxy = '--proxy' in args
+    use_transparent = '--transparent' in args or not use_proxy  # default to transparent
     
     print(f"🚀 Starting SGTM debug session for domain: {domain}")
     print(f"📝 Header value: {header_value}")
@@ -130,7 +137,7 @@ def main():
             if use_web:
                 cmd.extend(['--web-port', '8081'])
                 
-        else:
+        elif use_transparent:
             # Transparent proxy mode (default)
             print("📡 Setting up transparent proxy...")
             
@@ -138,7 +145,7 @@ def main():
                 print("✅ Transparent proxy enabled")
                 if use_web:
                     print("🌐 Web interface: http://127.0.0.1:8081")
-                print("📱 All HTTP/HTTPS traffic will be intercepted")
+                print("📱 All HTTP/HTTPS traffic will be intercepted automatically")
                 print("⏹️  Press Ctrl+C to stop\n")
                 
                 cmd = [
@@ -155,6 +162,8 @@ def main():
             else:
                 print("❌ Could not setup transparent proxy. Falling back to manual proxy mode.")
                 print("🔧 Configure your browser to use proxy: 127.0.0.1:8080")
+                if use_web:
+                    print("🌐 Web interface: http://127.0.0.1:8081")
                 print("⏹️  Press Ctrl+C to stop\n")
                 
                 cmd = [

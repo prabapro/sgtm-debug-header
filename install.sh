@@ -62,13 +62,25 @@ def response(flow: mitmproxy.http.HTTPFlow) -> None:
         return f.name
 
 def main():
-    if len(sys.argv) != 3:
-        print("Usage: sgtm-debug <domain> <header_value>")
+    # Parse arguments
+    args = sys.argv[1:]
+    
+    if len(args) < 2:
+        print("Usage: sgtm-debug <domain> <header_value> [options]")
         print("Example: sgtm-debug example.com ZW52LWRldjEyMzQ1")
+        print("Options:")
+        print("  --web    Use web interface (default: console)")
+        print("  --proxy  Use manual proxy mode (requires browser config)")
+        print("  --transparent  Use transparent proxy mode (default)")
         sys.exit(1)
     
-    domain = sys.argv[1]
-    header_value = sys.argv[2]
+    domain = args[0]
+    header_value = args[1]
+    
+    # Check for flags
+    use_web = '--web' in args
+    use_proxy = '--proxy' in args
+    use_transparent = '--transparent' in args or not use_proxy  # default to transparent
     
     print(f"Starting SGTM debug session for domain: {domain}")
     print(f"Header value: {header_value}")
