@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 SGTM Debug CLI - A mitmproxy wrapper for adding X-Gtm-Server-Preview headers
-Usage: sgtm-debug <domain> <header_value>
+Usage: sgtm-debug-header <domain> <header_value>
 """
 
 import sys
@@ -85,8 +85,8 @@ def main():
     args = sys.argv[1:]
     
     if len(args) < 2:
-        print("Usage: sgtm-debug <domain> <header_value> [options]")
-        print("Example: sgtm-debug example.com ZW52LWRldjEyMzQ1")
+        print("Usage: sgtm-debug-header <domain> <header_value> [options]")
+        print("Example: sgtm-debug-header example.com ZW52LWRldjEyMzQ1")
         print("Options:")
         print("  --web    Use web interface (default: console)")
         print("  --proxy  Use manual proxy mode (requires browser config)")

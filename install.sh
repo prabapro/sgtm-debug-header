@@ -1,13 +1,13 @@
 #!/bin/bash
-# Installation script for sgtm-debug
+# Installation script for sgtm-debug-header
 
 set -e
 
-SCRIPT_NAME="sgtm-debug"
+SCRIPT_NAME="sgtm-debug-header"
 INSTALL_DIR="/usr/local/bin"
-SCRIPT_URL="https://raw.githubusercontent.com/prabapro/sgtm-debug-header/main/sgtm-debug.py"
+SCRIPT_URL="https://raw.githubusercontent.com/prabapro/sgtm-debug-header-header/main/sgtm-debug-header-header.py"
 
-echo "Installing sgtm-debug CLI tool..."
+echo "Installing sgtm-debug-header CLI tool..."
 
 # Check if mitmproxy is installed
 if ! command -v mitmdump &> /dev/null; then
@@ -21,7 +21,7 @@ cat > "$SCRIPT_NAME" << 'EOF'
 #!/usr/bin/env python3
 """
 SGTM Debug CLI - A mitmproxy wrapper for adding X-Gtm-Server-Preview headers
-Usage: sgtm-debug <domain> <header_value>
+Usage: sgtm-debug-header <domain> <header_value>
 """
 
 import sys
@@ -66,8 +66,8 @@ def main():
     args = sys.argv[1:]
     
     if len(args) < 2:
-        print("Usage: sgtm-debug <domain> <header_value> [options]")
-        print("Example: sgtm-debug example.com ZW52LWRldjEyMzQ1")
+        print("Usage: sgtm-debug-header <domain> <header_value> [options]")
+        print("Example: sgtm-debug-header example.com ZW52LWRldjEyMzQ1")
         print("Options:")
         print("  --web    Use web interface (default: console)")
         print("  --proxy  Use manual proxy mode (requires browser config)")
@@ -123,16 +123,16 @@ chmod +x "$SCRIPT_NAME"
 # Move to install directory
 if [ -w "$INSTALL_DIR" ]; then
     mv "$SCRIPT_NAME" "$INSTALL_DIR/"
-    echo "✅ sgtm-debug installed successfully to $INSTALL_DIR"
+    echo "✅ sgtm-debug-header installed successfully to $INSTALL_DIR"
 else
     echo "Installing to $INSTALL_DIR requires sudo..."
     sudo mv "$SCRIPT_NAME" "$INSTALL_DIR/"
-    echo "✅ sgtm-debug installed successfully to $INSTALL_DIR"
+    echo "✅ sgtm-debug-header installed successfully to $INSTALL_DIR"
 fi
 
 echo ""
-echo "Usage: sgtm-debug <domain> <header_value>"
-echo "Example: sgtm-debug example.com ZW52LWRldjEyMzQ1"
+echo "Usage: sgtm-debug-header <domain> <header_value>"
+echo "Example: sgtm-debug-header example.com ZW52LWRldjEyMzQ1"
 echo ""
 echo "The proxy will run on 127.0.0.1:8080"
 echo "Configure your browser to use this proxy, then visit your domain."
